@@ -49,6 +49,8 @@ int main(){
 
  
 
+
+
     GLFWwindow* window = glfwCreateWindow(800,600,"ACADSoft",NULL,NULL);
     if (window == NULL){
         printf("Failed to make a glfw window\n");
@@ -66,129 +68,8 @@ int main(){
     glfwSetFramebufferSizeCallback(window,framebuffer_size_callback);
 
 
-        float vertices[]={
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f, 
-        0.0f,  0.5f, 0.0f
-    };
-    
-    unsigned int VBO, VOA;
-    glGenVertexArrays(1,&VOA);
-    glGenBuffers(1,&VBO);    
-
-    glBindVertexArray(VOA);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0 );
-    glEnableVertexAttribArray(0);
-    
-
-    // Vertex Shaders 
-    const char *vertex_shader_source = "#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
-        "void main()\n"
-        "{\n"
-        " gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-        "}\0";
-
-    unsigned int vertex_shader;
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertex_shader,1,&vertex_shader_source,NULL);
-    glCompileShader(vertex_shader);
 
 
-    // Fragment Shaders {
-    const char *fragment_colour = "#version 330 core\n"
-        "out vec4 FragColor;\n"
-        "void main()\n"
-        "{\n"
-        " FragColor = vec4(1.0f, 0.5f, 0.8f, 1.0f);\n"
-        "}\n";
-
-    unsigned int fragment_shader;
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    glShaderSource(fragment_shader,1,&fragment_colour, NULL);
-    glCompileShader(fragment_shader);
-    
-    
-    // Shader Program
-    unsigned int shader_Program;
-    shader_Program = glCreateProgram();
-
-    glAttachShader(shader_Program,vertex_shader);
-    glAttachShader(shader_Program,fragment_shader);
-    glLinkProgram(shader_Program);
-
-
-
-    // glUseProgram(shader_Program);
-
-    // Debug parameters for shader
-    int vs_success;
-    char vs_infoLog[512];
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS,&vs_success);
-
-    if(!vs_success){
-        glGetShaderInfoLog(vertex_shader,312,NULL,vs_infoLog);
-        printf("ERROR::OPENGL::SHADER::VERTEX::COMPILATION fAILED!!\n %s",vs_infoLog);
-    }
-    else printf("Debug::Vertex Shader Passed\n");
-
-
-
-    // Debug parameters for shaders
-    int fs_success;
-    char fs_infoLog[512];
-    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS,&fs_success);
-
-    if(!fs_success){
-        glGetShaderInfoLog(fragment_shader,312,NULL,fs_infoLog);
-        printf("ERROR::OPENGL::SHADER::Fragment::COMPILATION fAILED!!\n %s",fs_infoLog);
-    }
-    else printf("Debug::Fragment Shader Passed\n");
-
-
-
-    // Removing shaders after loading attaching to the workspace
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
-
-
-
-    glUseProgram(shader_Program);
-    glBindVertexArray(VOA);
-    glDrawArrays(GL_TRIANGLES,0,3);
-
-    
-
-
-
-    // Window loop
-    while (!glfwWindowShouldClose(window)){
-
-        process_input(window);
-
-    
-
-    GLFWwindow* window = glfwCreateWindow(800,600,"ACADSoft",NULL,NULL);
-    if (window == NULL){
-        printf("Failed to make a glfw window\n");
-        glfwTerminate();
-        return -1;
-    } else printf("GLFW Window created successfully\n");
-
-    glfwMakeContextCurrent(window);
-
-        if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        printf("Failed to initialize GLAD\n");
-        return -1;
-    }
-    glViewport(0,0,800,600);
-    glfwSetFramebufferSizeCallback(window,framebuffer_size_callback);
 
 
     float vertices[]={
@@ -202,9 +83,9 @@ int main(){
         0, 1, 2,
         2, 3, 0
     };
-
-
     
+
+
     unsigned int VBO, VOA, EBO;
     glGenVertexArrays(1,&VOA);
     glGenBuffers(1,&EBO);
@@ -219,7 +100,11 @@ int main(){
 
     glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0 );
     glEnableVertexAttribArray(0);
-    
+
+
+
+
+
 
     // Vertex Shaders 
     const char *vertex_shader_source = "#version 330 core\n"
@@ -295,14 +180,9 @@ int main(){
 
 
 
-    
-
-    
-
-
-
     // Window loop
     while (!glfwWindowShouldClose(window)){
+
 
         process_input(window);
 
@@ -319,19 +199,6 @@ int main(){
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    // CleanUp 
-
-    glfwTerminate();
-    return 0;
-    //some render commands
-        glClearColor(0.1f,0.1f,0.1f,0.2f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-    // CleanUp 
 
     glfwTerminate();
     return 0;
