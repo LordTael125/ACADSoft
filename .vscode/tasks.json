@@ -5,13 +5,13 @@
             "label": "NVCC build active file",
             "command": "/opt/cuda/bin/nvcc",
             "args": [
-                
+                "-Wno-deprecated-gpu-targets",
                 "-g",
                 "-I${workspaceFolder}/include",
                 "${fileDirname}/glad.c",
                 "${file}",
                 "-o",
-                "${fileDirname}/.temp/${fileBasenameNoExtension}",
+                "${fileDirname}/${fileBasenameNoExtension}",
                 "-lGL",
                 "-lglfw"
             ],

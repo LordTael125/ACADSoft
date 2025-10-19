@@ -1,4 +1,9 @@
-include
+include/glad
+include/KHR
+include/GLFW
 bin
 src/.temp
 src/glad.c
+src/main
+.vscode/c_cpp_properties.json
+.vscode/settings.json
