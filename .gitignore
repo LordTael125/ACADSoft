@@ -2,7 +2,7 @@ include/glad
 include/KHR
 include/GLFW
 bin
-src/.temp
+src/Builds
 src/glad.c
 src/main
 .vscode/c_cpp_properties.json

@@ -32,9 +32,10 @@ void process_input(GLFWwindow* window){
 
 int main(){
 
-    const char* vpath="ShaderSource/vertexShader.shad";
-    const char* fpath="ShaderSource/fragmentShader.shad";
+    const char* vpath="ShaderSource/Sh1/vertexShader.shad";
+    const char* fpath="ShaderSource/Sh1/fragmentShader.shad";
 
+    int width = 900, height = 600;
 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,3);
@@ -43,7 +44,7 @@ int main(){
 
 
 
-    GLFWwindow* window = glfwCreateWindow(800,600,"ACADSoft",NULL,NULL);
+    GLFWwindow* window = glfwCreateWindow(width,height,"ACADSoft",NULL,NULL);
     if (window == NULL){
         std::cout<<"Failed to make a glfw window\n";
         glfwTerminate();
@@ -56,15 +57,23 @@ int main(){
         printf("Failed to initialize GLAD\n");
         return -1;
     }
-    glViewport(0,0,800,600);
+    glViewport(0,0,width,height);
     glfwSetFramebufferSizeCallback(window,framebuffer_size_callback);
 
+
+    // vertices coordinates
 
     float vertices[]={
          0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,       // right
         -0.5f, -0.5f, 0.0f, 0.0f, 0.9f, 0.0f,       // left
          0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f        // top
         
+    };
+
+    float texCoords[]={
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        0.5f, 1.0f,
     };
 
     Shader ourShader(fpath,vpath);
@@ -85,6 +94,8 @@ int main(){
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)) );
     glEnableVertexAttribArray(1);
+
+
 
 
     // Window loop
@@ -111,7 +122,6 @@ int main(){
 
     glfwTerminate();
 
-    // while(!((bool)scanf("%d")));
     return 0;
 
 }

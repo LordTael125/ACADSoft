@@ -11,7 +11,7 @@
                 "${fileDirname}/glad.c",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "${fileDirname}/Builds/${fileBasenameNoExtension}",
                 "-lGL",
                 "-lglfw"
             ],
