@@ -22,7 +22,7 @@ This is a passion project where a CAD software design is made using core OpenGL 
 
 > Note
 ```
-This repository also contains the launch configuration for VScode to run/compile using NVCC to speed up the development process
+Repository contains the launch configs for VScode to run/compile using NVCC to speed up the development process
 ```
 
 > Compile setup instruction
@@ -40,3 +40,4 @@ This repository also contains the launch configuration for VScode to run/compile
 The launch is configured to run nvcc based on Archlinux based distribution
 For any other distribution change the launch.json as following
 -> change the path of nvcc from /opt/cuda/bin/nvcc to path_to_nvcc/nvcc
+-> or change it to your desired compiler 
