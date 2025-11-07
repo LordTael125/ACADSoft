@@ -10,7 +10,7 @@
 
 
 //To Resize the window
-void framebuffer_size_callback(GLFWwindow* window,int height,int width){
+void framebuffer_size_callback(GLFWwindow* window,int width, int height){
     glViewport(0,0,width,height);
 }
 
@@ -49,7 +49,7 @@ int main()
 
     glfwMakeContextCurrent(window);
 
-        if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         printf("Failed to initialize GLAD\n");
         return -1;
     }
@@ -137,6 +137,8 @@ int main()
         glBindTexture(GL_TEXTURE_2D,texture);
         glBindVertexArray(VOA);
         glDrawElements(GL_TRIANGLES, 6 , GL_UNSIGNED_INT, 0);
+
+    
         glBindVertexArray(0);
 
 
