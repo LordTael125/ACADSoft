@@ -13,7 +13,6 @@ This is a passion project where a CAD software design is made using core OpenGL 
 ```
 -> Learn Basics of **OpenGl**
 -> Use it to create a demo CAD Software
--> Time Limit one Month
 ```
 
 
@@ -29,7 +28,7 @@ Repository contains the launch configs for VScode to run/compile using NVCC to s
 
 1. Download glad.h from the official glad download source
 
-2. Downlad the glfw and compile it using cmake
+2. Download the glfw and compile it using cmake
 
 3. Add the the files into include folder in the workspace
 
@@ -37,7 +36,9 @@ Repository contains the launch configs for VScode to run/compile using NVCC to s
 
 > **Note**
 
-The launch is configured to run nvcc based on Archlinux based distribution
+The launch is configured to compile program using nvcc based on Arch-linux based distribution
 For any other distribution change the launch.json as following
+```
 -> change the path of nvcc from /opt/cuda/bin/nvcc to path_to_nvcc/nvcc
 -> or change it to your desired compiler 
+```

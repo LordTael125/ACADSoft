@@ -57,10 +57,10 @@ int main(){
 
     float vertices[]= {
         // Coords               Colour
-        -0.5f,  0.5f,  0.0f,   1.0f, 0.0f, 0.0f,       // 0 Top Left
-         0.5f,  0.5f,  0.0f,   0.0f, 1.0f, 0.0f,       // 1 Top right
-         0.5f, -0.5f,  0.0f,   0.0f, 0.0f, 1.0f,       // 2 Bottom right
-        -0.5f, -0.5f,  0.0f,   0.0f, 0.5f, 0.5f        // 3 Bottom Left
+        -0.5f,  0.5f,  0.0f,   1.0f, 0.0f, 0.0f,    0.0f, 1.0f,       // 0 Top Left
+         0.5f,  0.5f,  0.0f,   0.0f, 1.0f, 0.0f,    1.0f, 1.0f,       // 1 Top right
+         0.5f, -0.5f,  0.0f,   0.0f, 0.0f, 1.0f,    0.0f, 0.0f,       // 2 Bottom right
+        -0.5f, -0.5f,  0.0f,   0.0f, 0.5f, 0.5f,    0.0f, 0.0f        // 3 Bottom Left
 
     };
 
@@ -69,13 +69,13 @@ int main(){
         2, 3, 0      // Left  Lower Triangle
     };
 
-    glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
-    glm::mat4 trans = glm::mat4(1.0f);
+    // glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
+    // glm::mat4 trans = glm::mat4(1.0f);
 
-    trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
-    vec = vec * trans;
+    // trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
+    // vec = vec * trans;
 
-    std::cout << "\n\n" << vec.x << vec.y << vec.z << std::endl;
+    // std::cout << "\n\n" << vec.x << "  " << vec.y << "  " << vec.z << std::endl;
 
 
     unsigned int VAO;       // Vertex Array Objects
@@ -94,19 +94,41 @@ int main(){
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices),indices,GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0,3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0 );
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0 );
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)) );
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(8*sizeof(float)) );
     glEnableVertexAttribArray(1);
-    // glVertexAttribPointer(2,2, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(6*sizeof(float)));
-    // glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(8*sizeof(float)) );
+    glEnableVertexAttribArray(2);
+
+    // unsigned int texture;
+    // glGenTextures(1,&texture);
+
+    // glBindTexture(GL_TEXTURE_2D, texture);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // int texWidth, texHeight, nrChannels;
+
+    // unsigned char *Texture = stbi_load("Textures/Small_rocks.jpg", &texWidth, &texHeight, &nrChannels, 0);
+
+    // if (Texture){
+    //     glTexImage2D(GL_TEXTURE_2D, 0 , GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture);
+    //     glGenerateMipmap(GL_TEXTURE_2D);
+    //     std::cout << "Debug::Textures loaded succesfully" << std::endl;
+    // } else std::cout << "Failed To load Textures" << std::endl;
+    
 
 
 
     Shader myShader(fragShad, vertShad);
 
 
-
+    // unsigned int transformLoc = glGetUniformLocation(myShader.programID,"transform");
+    // glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 
     while (!glfwWindowShouldClose(window)){
